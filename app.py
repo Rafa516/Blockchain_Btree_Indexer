@@ -364,8 +364,8 @@ elif page == "Dados de Demonstração":
             st.error(f"❌ Erro ao criar dados de demonstração: {str(e)}")
 
 # Visualizar Blockchain
-elif page == " Visualizar Blockchain":
-    st.header(" Visualizar Blockchain Completo")
+elif page == "Visualizar Blockchain":
+    st.header("Visualizar Blockchain Completo")
     
     # if st.button("🔄 Atualizar Visualização"):
     #     pass
