@@ -140,12 +140,12 @@ class BlockchainIndexer:
         """Popula o blockchain com dados de demonstração."""
         # Adicionar transações de exemplo
         demo_transactions = [
-            ('Alice', 'Ricardo', 100.0),
-            ('Ricardo', 'João', 50.0),
-            ('João', 'Maria', 25.0),
-            ('Maria', 'Alice', 10.0),
-            ('Alice', 'João', 30.0),
-            ('Ricardo', 'Maria', 15.0),
+            ('Luiza', 'Matheus', 100.0),
+            ('Matheus', 'João', 50.0),
+            ('João', 'Rafael', 25.0),
+            ('Rafael', 'Luiza', 10.0),
+            ('Luiza', 'João', 30.0),
+            ('Matheus', 'Rafael', 15.0),
         ]
         
         transaction_ids = []
@@ -158,9 +158,9 @@ class BlockchainIndexer:
         
         # Adicionar mais transações
         more_transactions = [
-            ('João', 'Ricardo', 20.0),
-            ('Maria', 'João', 5.0),
-            ('Alice', 'Maria', 40.0),
+            ('João', 'Matheus', 20.0),
+            ('Rafael', 'João', 5.0),
+            ('Luiza', 'Rafael', 40.0),
         ]
         
         for sender, receiver, amount in more_transactions:

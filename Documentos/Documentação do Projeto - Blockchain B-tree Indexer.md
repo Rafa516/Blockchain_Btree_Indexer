@@ -596,35 +596,35 @@ flowchart TD
 ```mermaid
 graph TD
     style Root fill:#3a0ca3,color:white
-    Root["Sender Index (Alice)"]
+    Root["Sender Index (Luiza)"]
     
-    subgraph TXs_Alice["Transações de Alice"]
-        style TXs_Alice fill:#7209b7,color:white
-        A1["Tx1: 5 BTC → Ricardo"]
+    subgraph TXs_Luiza["Transações de Luiza"]
+        style TXs_Luiza fill:#7209b7,color:white
+        A1["Tx1: 5 BTC → Matheus"]
         A2["Tx2: 3 BTC → João"]
-        A3["Tx3: 8 BTC → Maria"]
+        A3["Tx3: 8 BTC → Rafael"]
     end
     
-    subgraph TXs_Ricardo["Transações de Ricardo"]
-        style TXs_Ricardo fill:#4361ee,color:white
+    subgraph TXs_Matheus["Transações de Matheus"]
+        style TXs_Matheus fill:#4361ee,color:white
         B1["Tx4: 2 BTC → Antônio"]
     end
     
-    Root --> TXs_Alice
-    Root --> TXs_Ricardo
+    Root --> TXs_Luiza
+    Root --> TXs_Matheus
 ```
 
 #### Caso de Uso: Consulta por Remetente
 ```python
-transactions = get_transactions_by_sender("Alice")
+transactions = get_transactions_by_sender("Luiza")
 ```
 
 **Fluxo de Operação:**
-1. A B-tree navega até o nó "Alice" usando busca por chave (`O(log n)`)
+1. A B-tree navega até o nó "Luiza" usando busca por chave (`O(log n)`)
 2. Retorna todas as transações associadas:
-   - `Tx1: 5 BTC → Ricardo`
+   - `Tx1: 5 BTC → Matheus`
    - `Tx2: 3 BTC → João`
-   - `Tx3: 8 BTC → Maria`
+   - `Tx3: 8 BTC → Rafael`
 
 #### Comparação de Performance
 | Método          | Complexidade      | Descrição                          |
@@ -638,7 +638,7 @@ transactions = get_transactions_by_sender("Alice")
 
 #### Benefícios do Índice
 - **Consultas Rápidas** para serviços de exploradores de blockchain
-- **Suporte a Agregações** (ex: saldo total enviado por Alice)
+- **Suporte a Agregações** (ex: saldo total enviado por Luiza)
 - **Escalabilidade** mesmo com crescimento da blockchain
 
 
@@ -693,7 +693,7 @@ sequenceDiagram
    ```python
    # Exemplo: Consulta combinada
    get_transactions(
-       sender="Alice",
+       sender="Luiza",
        start_time="2023-01-01",
        end_time="2023-12-31"
    )
@@ -817,14 +817,14 @@ class BlockchainIndexer:
         self._index_block(self.blockchain.get_latest_block())
 
         # Adicionar transações de demonstração
-        self.add_transaction("Alice", "Ricardo", 10.0)
-        self.add_transaction("Ricardo", "João", 5.0)
-        self.add_transaction("João", "Alice", 7.5)
-        self.add_transaction("Alice", "Maria", 20.0)
-        self.add_transaction("Maria", "Ricardo", 12.0)
-        self.add_transaction("Ricardo", "Antônio", 3.0)
-        self.add_transaction("Antônio", "Alice", 8.0)
-        self.add_transaction("Alice", "Márcio", 15.0)
+        self.add_transaction("Luiza", "Matheus", 10.0)
+        self.add_transaction("Matheus", "João", 5.0)
+        self.add_transaction("João", "Luiza", 7.5)
+        self.add_transaction("Luiza", "Rafael", 20.0)
+        self.add_transaction("Rafael", "Matheus", 12.0)
+        self.add_transaction("Matheus", "Antônio", 3.0)
+        self.add_transaction("Antônio", "Luiza", 8.0)
+        self.add_transaction("Luiza", "Márcio", 15.0)
         self.add_transaction("Márcio", "Isabel", 6.0)
         self.add_transaction("Isabel", "Marcos", 9.0)
 
