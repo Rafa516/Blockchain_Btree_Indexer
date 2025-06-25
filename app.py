@@ -191,8 +191,8 @@ elif page == "Consultar por ID":
             st.error(" Por favor, informe o ID da transação.")
 
 # Consultar por Remetente
-elif page == "👤 Consultar por Remetente":
-    st.header("👤 Buscar Transações por Remetente")
+elif page == "Consultar por Remetente":
+    st.header("Buscar Transações por Remetente")
     
     sender = st.text_input("Remetente", placeholder="Ex: Luiza")
     
@@ -215,8 +215,8 @@ elif page == "👤 Consultar por Remetente":
             st.error("❌ Por favor, informe o remetente.")
 
 # Consultar por Destinatário
-elif page == " Consultar por Destinatário":
-    st.header(" Buscar Transações por Destinatário")
+elif page == "Consultar por Destinatário":
+    st.header("Buscar Transações por Destinatário")
     
     receiver = st.text_input("Destinatário", placeholder="Ex: Matheus")
     
@@ -239,8 +239,8 @@ elif page == " Consultar por Destinatário":
             st.error(" Por favor, informe o destinatário.")
 
 # Consultar por Período
-elif page == " Consultar por Período":
-    st.header(" Buscar Transações por Período")
+elif page == "Consultar por Período":
+    st.header("Buscar Transações por Período")
     
     col1, col2 = st.columns(2)
     
@@ -252,7 +252,7 @@ elif page == " Consultar por Período":
         end_date = st.date_input("Data Final")
         end_time = st.time_input("Hora Final")
     
-    if st.button(" Buscar"):
+    if st.button("Buscar"):
         try:
             # Converter para timestamp
             start_datetime = datetime.combine(start_date, start_time)
@@ -278,12 +278,12 @@ elif page == " Consultar por Período":
             st.error(f"❌ Erro na busca: {str(e)}")
 
 # Consultar Saldo
-elif page == " Consultar Saldo":
-    st.header(" Consultar Saldo de Endereço")
+elif page == "Consultar Saldo":
+    st.header("Consultar Saldo de Endereço")
     
     address = st.text_input("Endereço", placeholder="Ex: Luiza")
     
-    if st.button(" Consultar Saldo"):
+    if st.button("Consultar Saldo"):
         if address:
             try:
                 balance = indexer.get_balance(address)
@@ -302,7 +302,7 @@ elif page == " Consultar Saldo":
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.write("**📤 Transações Enviadas:**")
+                    st.write("** Transações Enviadas:**")
                     if sent_transactions:
                         for tx in sent_transactions:
                             if isinstance(tx, dict) and 'transaction' in tx:
@@ -327,17 +327,17 @@ elif page == " Consultar Saldo":
             st.error(" Por favor, informe o endereço.")
 
 # Dados de Demonstração
-elif page == " Dados de Demonstração":
-    st.header(" Dados de Demonstração")
+elif page == "Dados de Demonstração":
+    st.header("Dados de Demonstração")
     
-    st.info(" Clique no botão abaixo para popular o blockchain com dados de exemplo para testes.")
+    st.info("Clique no botão abaixo para popular o blockchain com dados de exemplo para testes.")
     
-    if st.button(" Criar Dados de Demonstração"):
+    if st.button("Criar Dados de Demonstração"):
         try:
             with st.spinner(" Criando dados de demonstração..."):
                 result = indexer.populate_demo_data()
             
-            st.success("✅ Dados de demonstração criados com sucesso!")
+            st.success("Dados de demonstração criados com sucesso!")
             
             with st.expander(" Detalhes", expanded=True):
                 st.write(f"**Transações criadas:** {len(result['transaction_ids'])}")
@@ -374,7 +374,7 @@ elif page == " Visualizar Blockchain":
     try:
         blockchain_data = indexer.get_full_blockchain()
         
-        st.subheader(" Informações Gerais")
+        st.subheader("Informações Gerais")
         col1, col2 = st.columns(2)
         
         with col1:
