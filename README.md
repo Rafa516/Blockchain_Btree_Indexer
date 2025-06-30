@@ -114,14 +114,14 @@ A interface da aplicação é organizada em seções acessíveis através de um 
 
 1.  **Dashboard:** Ao iniciar, você verá o Dashboard com estatísticas iniciais do blockchain, que incluirá apenas o bloco gênese (o primeiro bloco da cadeia).
 
-2.  **Criar Dados de Demonstração:** Para experimentar as funcionalidades de indexação e consulta, é altamente recomendável utilizar a seção "🎯 Dados de Demonstração". Clique no botão "🎯 Criar Dados de Demonstração" para popular o blockchain com um conjunto de transações e blocos de exemplo. Isso criará um conjunto de dados realista para testar as funcionalidades de consulta e observar o impacto das B-trees.
+2.  **Criar Dados de Demonstração:** Para experimentar as funcionalidades de indexação e consulta, é altamente recomendável utilizar a seção "Dados de Demonstração". Clique no botão " Criar Dados de Demonstração" para popular o blockchain com um conjunto de transações e blocos de exemplo. Isso criará um conjunto de dados realista para testar as funcionalidades de consulta e observar o impacto das B-trees.
 
-3.  **Adicionar Transação:** Na seção "💸 Adicionar Transação", você pode criar novas transações manualmente, especificando remetente, destinatário e valor. Essas transações serão adicionadas à lista de transações pendentes.
+3.  **Adicionar Transação:** Na seção "Adicionar Transação", você pode criar novas transações manualmente, especificando remetente, destinatário e valor. Essas transações serão adicionadas à lista de transações pendentes.
 
-4.  **Minerar Bloco:** Após adicionar transações, vá para a seção "⛏️ Minerar Bloco". Informe um endereço de minerador e clique em "⛏️ Minerar Bloco". As transações pendentes serão processadas em um novo bloco, que será adicionado à cadeia e, crucialmente, suas transações serão indexadas pelas B-trees.
+4.  **Minerar Bloco:** Após adicionar transações, vá para a seção "Minerar Bloco". Informe um endereço de minerador e clique em "Minerar Bloco". As transações pendentes serão processadas em um novo bloco, que será adicionado à cadeia e, crucialmente, suas transações serão indexadas pelas B-trees.
 
-5.  **Consultas Indexadas:** Explore as diferentes seções de consulta (🔍 Consultar por ID, 👤 Consultar por Remetente, 📨 Consultar por Destinatário, ⏰ Consultar por Período). Insira os critérios de busca e observe a rapidez com que os resultados são retornados, demonstrando a eficiência dos índices B-tree.
+5.  **Consultas Indexadas:** Explore as diferentes seções de consulta (Consultar por ID, Consultar por Remetente, Consultar por Destinatário, Consultar por Período). Insira os critérios de busca e observe a rapidez com que os resultados são retornados, demonstrando a eficiência dos índices B-tree.
 
-6.  **Consultar Saldo:** Na seção "💰 Consultar Saldo", você pode verificar o saldo de qualquer endereço, e o histórico de transações enviadas e recebidas por ele.
+6.  **Consultar Saldo:** Na seção "Consultar Saldo", você pode verificar o saldo de qualquer endereço, e o histórico de transações enviadas e recebidas por ele.
 
-7.  **Visualizar Blockchain:** A seção "🔗 Visualizar Blockchain" permite inspecionar a cadeia de blocos completa, bloco por bloco, e ver as transações contidas em cada um.
+7.  **Visualizar Blockchain:** A seção "Visualizar Blockchain" permite inspecionar a cadeia de blocos completa, bloco por bloco, e ver as transações contidas em cada um.
