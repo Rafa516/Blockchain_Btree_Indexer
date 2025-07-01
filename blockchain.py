@@ -81,7 +81,7 @@ class Blockchain:
     def __init__(self):
         self.difficulty = 2
         self.pending_transactions: List[Transaction] = []
-        self.mining_reward = 100
+        self.mining_reward = 12
         self.chain: List[Block] = [self._create_genesis_block()]
     
     def _create_genesis_block(self) -> Block:
@@ -96,7 +96,10 @@ class Blockchain:
         return self.chain[-1]
     
     def add_transaction(self, transaction: Transaction):
-        """Adiciona uma transação à lista de transações pendentes."""
+        """Adiciona uma transação à lista de transações pendentes, validando saldo do remetente."""
+        if transaction.sender is not None:
+            if self.get_balance(transaction.sender) < transaction.amount:
+                raise Exception("Saldo insuficiente para realizar a transação.")
         self.pending_transactions.append(transaction)
     
     def mine_pending_transactions(self, mining_reward_address: str):

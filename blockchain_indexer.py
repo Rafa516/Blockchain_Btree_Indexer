@@ -25,20 +25,23 @@ class BlockchainIndexer:
         self.blockchain.add_transaction(transaction)
         return transaction.transaction_id
     
-    def mine_block(self, miner_address: str) -> Dict[str, Any]:
-        """Minera um novo bloco e atualiza os índices."""
+    def mine_block(self, miner_address: str, miner_name: str = "") -> Dict[str, Any]:
+        """Minera um novo bloco e atualiza os índices. miner_name é opcional."""
         # Minerar o bloco
         block = self.blockchain.mine_pending_transactions(miner_address)
         
         # Indexar o novo bloco
         self._index_block(block)
         
-        return {
+        result = {
             'block_index': block.index,
             'block_hash': block.hash,
             'transactions_count': len(block.transactions),
             'timestamp': block.timestamp
         }
+        if miner_name:
+            result['miner_name'] = miner_name
+        return result
     
     def _index_block(self, block):
         """Indexa todas as transações de um bloco."""
@@ -137,43 +140,69 @@ class BlockchainIndexer:
         return self.blockchain.to_dict()
     
     def populate_demo_data(self) -> Dict[str, Any]:
-        """Popula o blockchain com dados de demonstração."""
-        # Adicionar transações de exemplo
-        demo_transactions = [
-            ('Luiza', 'Matheus', 100.0),
-            ('Matheus', 'João', 50.0),
-            ('João', 'Rafael', 25.0),
-            ('Rafael', 'Luiza', 10.0),
-            ('Luiza', 'João', 30.0),
-            ('Matheus', 'Rafael', 15.0),
-        ]
-        
+        """Popula o blockchain com dados de demonstração de forma intuitiva e compatível com validação de saldo."""
         transaction_ids = []
-        for sender, receiver, amount in demo_transactions:
-            tx_id = self.add_transaction(sender, receiver, amount)
-            transaction_ids.append(tx_id)
-        
-        # Minerar primeiro bloco
-        block1 = self.mine_block('DemoMiner1')
-        
-        # Adicionar mais transações
-        more_transactions = [
-            ('João', 'Matheus', 20.0),
-            ('Rafael', 'João', 5.0),
-            ('Luiza', 'Rafael', 40.0),
+        blocks_mined = []
+        self.mine_block('Luiza')
+        blocks_mined.append('Luiza')
+        txs1 = [
+            ('Luiza', 'Matheus', 10.0),
+            ('Matheus', 'João', 5.0),
+            ('João', 'Rafael', 2.0),
+            ('Luiza', 'Rafael', 1.0),
+            ('Matheus', 'Luiza', 2.0),
         ]
-        
-        for sender, receiver, amount in more_transactions:
-            tx_id = self.add_transaction(sender, receiver, amount)
-            transaction_ids.append(tx_id)
-        
-        # Minerar segundo bloco
-        block2 = self.mine_block('DemoMiner2')
-        
+        for sender, receiver, amount in txs1:
+            try:
+                tx_id = self.add_transaction(sender, receiver, amount)
+                transaction_ids.append(tx_id)
+            except Exception:
+                pass
+        blocks_mined.append(self.mine_block('Matheus'))
+        txs2 = [
+            ('Rafael', 'Luiza', 1.0),
+            ('Luiza', 'João', 3.0),
+            ('João', 'Matheus', 2.0),
+            ('Matheus', 'Rafael', 1.0),
+            ('Rafael', 'Matheus', 2.0),
+        ]
+        for sender, receiver, amount in txs2:
+            try:
+                tx_id = self.add_transaction(sender, receiver, amount)
+                transaction_ids.append(tx_id)
+            except Exception:
+                pass
+        blocks_mined.append(self.mine_block('João'))
+        txs3 = [
+            ('João', 'Matheus', 2.0),
+            ('Matheus', 'Rafael', 1.0),
+            ('Rafael', 'Luiza', 2.0),
+            ('Luiza', 'Matheus', 1.0),
+        ]
+        for sender, receiver, amount in txs3:
+            try:
+                tx_id = self.add_transaction(sender, receiver, amount)
+                transaction_ids.append(tx_id)
+            except Exception:
+                pass
+        blocks_mined.append(self.mine_block('Rafael'))
+        txs4 = [
+            ('Luiza', 'João', 2.0),
+            ('João', 'Rafael', 1.0),
+            ('Rafael', 'Matheus', 2.0),
+        ]
+        for sender, receiver, amount in txs4:
+            try:
+                tx_id = self.add_transaction(sender, receiver, amount)
+                transaction_ids.append(tx_id)
+            except Exception:
+                pass
+        blocks_mined.append(self.mine_block('Luiza'))
+
         return {
             'message': 'Dados de demonstração criados com sucesso',
             'transaction_ids': transaction_ids,
-            'blocks_mined': [block1, block2],
+            'blocks_mined': blocks_mined,
             'stats': self.get_blockchain_stats()
         }
 

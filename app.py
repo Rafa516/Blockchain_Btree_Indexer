@@ -145,24 +145,26 @@ elif page == "Minerar Bloco":
         st.info(f" Há {stats['pending_transactions']} transação(ões) pendente(s) para minerar.")
         
         miner_address = st.text_input("Endereço do Minerador", value="Miner1", placeholder="Ex: Miner1")
+        miner_name = st.text_input("Nome do Minerador (opcional)", value="", placeholder="Ex: João")
         
         if st.button("Minerar Bloco"):
             if miner_address:
                 try:
                     with st.spinner("⛏️ Minerando bloco..."):
-                        block_info = indexer.mine_block(miner_address)
-                    
+                        if miner_name.strip():
+                            block_info = indexer.mine_block(miner_address, miner_name.strip())
+                        else:
+                            block_info = indexer.mine_block(miner_address)
                     st.success("Bloco minerado com sucesso!")
-                    
                     col1, col2 = st.columns(2)
                     with col1:
                         st.write(f"**Índice do Bloco:** {block_info['block_index']}")
                         st.write(f"**Hash do Bloco:** {block_info['block_hash'][:16]}...")
-                    
+                        if block_info.get('miner_name'):
+                            st.write(f"**Minerador:** {block_info['miner_name']}")
                     with col2:
                         st.write(f"**Transações:** {block_info['transactions_count']}")
                         st.write(f"**Timestamp:** {format_timestamp(block_info['timestamp'])}")
-                    
                 except Exception as e:
                     st.error(f"Erro ao minerar bloco: {str(e)}")
             else:
